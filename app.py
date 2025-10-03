@@ -14,11 +14,25 @@ class Enemy:
             print(f"{self.name} har vunnit")
         else:
             pass
+    
+    def check_death(self):
+        print(f"kollar om du lever... du har {self.health} liv kvar.")
+        if self.health <= 0:
+            print("du är död, noob")
+        else:
+            print("du är inte död än")
 
 
-gobo = Enemy(30, 10, "Gobo")
+
+gobo = Enemy(100, 10, "Gobo")
 gobo.print_status()
-slime = Enemy(10, 5, "Slimey")
+slime = Enemy(100, 5, "Slimey")
 slime.print_status()
-gobo.attack(slime)
-gobo.print_status()
+while True:
+    slime.attack(gobo)
+    gobo.attack(slime)
+    slime.check_death()
+    gobo.check_death()
+    if gobo.health <= 0 or slime.health <= 0:
+        break
+slime.check_death()
